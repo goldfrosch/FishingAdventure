@@ -1,7 +1,11 @@
 package com.goldfrosch.plugin;
 
-import com.goldfrosch.plugin.event.PlayerEvent;
+import com.goldfrosch.plugin.event.PlayerEvents;
+import com.goldfrosch.plugin.items.ItemsList;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -12,24 +16,35 @@ import java.io.IOException;
 
 public class MainPlugin extends JavaPlugin implements Listener {
   PluginDescriptionFile pdfFile = this.getDescription();
-  PluginManager pm = Bukkit.getPluginManager();
   String pfName = pdfFile.getName() + " v" + pdfFile.getVersion();
 
-  private final File f = new File(getDataFolder(), "/items.yml");
-  public void makeFile(File file){
-    if(!file.exists() || !file.isFile()){
-      try{
-        file.createNewFile();
-      }catch(IOException e){
-        e.printStackTrace();
-      }
+  private File itemsConfigFile;
+  private FileConfiguration itemsConfig;
+
+  private void createItemsConfig() {
+    itemsConfigFile = new File(getDataFolder(), "items.yml");
+    if (!itemsConfigFile.exists()) {
+      itemsConfigFile.getParentFile().mkdirs();
+      saveResource("items.yml", false);
     }
+
+    itemsConfig= new YamlConfiguration();
+    try {
+      itemsConfig.load(itemsConfigFile);
+    } catch (IOException | InvalidConfigurationException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public FileConfiguration getItemsConfig() {
+    return this.itemsConfig;
   }
 
   @Override
   public void onEnable(){
-    getServer().getPluginManager().registerEvents(new PlayerEvent(),this);
+    new ItemsList(this);
 
+    Bukkit.getPluginManager().registerEvents(new PlayerEvents(this),this);
     //config파일 있는지 파악 후 생성
     if (!getDataFolder().exists()) {
       getConfig().options().copyDefaults(true);
@@ -37,9 +52,9 @@ public class MainPlugin extends JavaPlugin implements Listener {
     } else {
       saveConfig();
     }
+    //items.yml파일 생성
+    createItemsConfig();
 
-    //data.yml 생성
-    makeFile(f);
     consoleLog(pfName+"이 활성화 되었습니다");
     super.onEnable();
   }
@@ -52,5 +67,9 @@ public class MainPlugin extends JavaPlugin implements Listener {
 
   public void consoleLog(String msg){
     getLogger().info(msg);
+  }
+
+  public String replaceText(String text){
+    return text.replace("&", "§");
   }
 }

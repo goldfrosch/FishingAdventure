@@ -1,2 +1,3 @@
-com\goldfrosch\plugin\event\FishingEvent.class
+com\goldfrosch\plugin\event\PlayerEvents.class
 com\goldfrosch\plugin\MainPlugin.class
+com\goldfrosch\plugin\items\ItemsList.class

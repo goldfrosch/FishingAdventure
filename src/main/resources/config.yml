@@ -4,3 +4,24 @@ FishingAdventure:
     B: "&f[ &bB &f]"
     A: "&f[ &eA &f]"
     S: "&f[ &aS &f]"
+  RankPercent:
+    0:
+      C: 60
+      B: 20
+      A: 15
+      S: 5
+    1:
+      C: 60
+      B: 20
+      A: 15
+      S: 5
+    2:
+      C: 60
+      B: 20
+      A: 15
+      S: 5
+    3:
+      C: 60
+      B: 20
+      A: 15
+      S: 5

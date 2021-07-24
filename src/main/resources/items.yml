@@ -1,0 +1,13 @@
+Items:
+  C:
+    0:
+      name: "&aTEST"
+  B:
+    0:
+      name: "&bTEST2"
+  A:
+    0:
+      name: "&cTEST3"
+  S:
+    0:
+      name: "&dTEST4"
