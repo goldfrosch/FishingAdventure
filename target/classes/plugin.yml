@@ -1,5 +1,0 @@
-main: com.goldfrosch.plugin.MainPlugin
-name: FishingAdventure
-version: 1.0.0-SNAPSHOT
-api-version: 1.16
-author: GoldFrosch
