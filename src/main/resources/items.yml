@@ -1,13 +1,30 @@
 Items:
-  C:
-    0:
+  'C':
+    '0':
+      material: "stone"
       name: "&aTEST"
-  B:
-    0:
-      name: "&bTEST2"
-  A:
-    0:
-      name: "&cTEST3"
-  S:
-    0:
-      name: "&dTEST4"
+    '1':
+      material: "stone"
+      name: "&aTESTe1"
+    '2':
+      material: "stone"
+      name: "&aTESTe2"
+      lore:
+        - "&6test1"
+        - "&6test2"
+    '3':
+      material: "ston1"
+      name: "&aTESTe3"
+      lore:
+  'B':
+    '0':
+      material: "stone"
+      name: "&aTEST"
+  'A':
+    '0':
+      material: "stone"
+      name: "&aTEST"
+  'S':
+    '0':
+      material: "stone"
+      name: "&aTEST"

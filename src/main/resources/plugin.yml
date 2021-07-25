@@ -3,3 +3,6 @@ name: FishingAdventure
 version: 1.0.0-SNAPSHOT
 api-version: 1.16
 author: GoldFrosch
+commands:
+  fishing:
+    description: Main Command of FishingAdventure!

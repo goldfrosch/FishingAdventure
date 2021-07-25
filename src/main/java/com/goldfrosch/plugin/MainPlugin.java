@@ -1,5 +1,6 @@
 package com.goldfrosch.plugin;
 
+import com.goldfrosch.plugin.command.Commands;
 import com.goldfrosch.plugin.event.PlayerEvents;
 import com.goldfrosch.plugin.items.ItemsList;
 import org.bukkit.Bukkit;
@@ -8,7 +9,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -55,6 +55,11 @@ public class MainPlugin extends JavaPlugin implements Listener {
     //items.yml파일 생성
     createItemsConfig();
 
+    //command
+    Commands cmd = new Commands(this,"fishing");
+    getCommand(cmd.getCommand()).setExecutor(cmd);
+    getCommand(cmd.getCommand()).setTabCompleter(cmd);
+
     consoleLog(pfName+"이 활성화 되었습니다");
     super.onEnable();
   }
@@ -67,6 +72,14 @@ public class MainPlugin extends JavaPlugin implements Listener {
 
   public void consoleLog(String msg){
     getLogger().info(msg);
+  }
+
+  public String getStringConfig(String path) {
+    return getConfig().getString(path);
+  }
+
+  public String getStringItemsList(String path){
+    return getItemsConfig().getString(path);
   }
 
   public String replaceText(String text){

@@ -1,4 +1,6 @@
 FishingAdventure:
+  Message:
+    Prefix: "&fTEST"
   RankPrefix:
     C: "&8[ &7C &8]"
     B: "&f[ &bB &f]"
