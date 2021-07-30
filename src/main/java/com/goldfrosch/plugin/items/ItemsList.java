@@ -8,7 +8,6 @@ import java.util.Set;
 
 public class ItemsList {
   private MainPlugin plugin;
-
   public ItemsList(MainPlugin plugin){
     this.plugin = plugin;
   }

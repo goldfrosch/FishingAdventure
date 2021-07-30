@@ -40,6 +40,22 @@ public class MainPlugin extends JavaPlugin implements Listener {
     return this.itemsConfig;
   }
 
+  public void reloadItemsConfig() {
+    if(itemsConfigFile == null) {
+      itemsConfigFile = new File(getDataFolder(), "items.yml");
+    }
+    itemsConfig = YamlConfiguration.loadConfiguration(itemsConfigFile);
+  }
+
+  public void saveItemsConfig() {
+    try {
+      getItemsConfig().save(itemsConfigFile);
+    }
+    catch (IOException e) {
+      consoleLog("서버 저장 에러 발생");
+    }
+  }
+
   @Override
   public void onEnable(){
     new ItemsList(this);
@@ -52,6 +68,7 @@ public class MainPlugin extends JavaPlugin implements Listener {
     } else {
       saveConfig();
     }
+
     //items.yml파일 생성
     createItemsConfig();
 

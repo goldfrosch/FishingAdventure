@@ -1,8 +1,12 @@
 main: com.goldfrosch.plugin.MainPlugin
 name: FishingAdventure
-version: 1.0.0-SNAPSHOT
+version: 1.0.0
 api-version: 1.16
 author: GoldFrosch
 commands:
   fishing:
     description: Main Command of FishingAdventure!
+
+permissions:
+  fishingAdventure.op:
+    default: op
