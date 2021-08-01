@@ -89,8 +89,12 @@ public class Commands extends AbstractCommand{
                   plugin.getItemsConfig().set("Items." + currentRank + "." + itemListSize.size() + ".material",String.valueOf(playerItem.getType()));
                   plugin.getItemsConfig().set("Items." + currentRank + "." + itemListSize.size() + ".name",saveName.replace("§", "&"));
 
+                  plugin.getItemsConfig().set("Items." + currentRank + "." + itemListSize.size() + ".broadcast","&a테스트 브로드캐스팅");
+                  plugin.getItemsConfig().set("Items." + currentRank + "." + itemListSize.size() + ".message","&a테스트 메세지");
+
                   plugin.saveItemsConfig();
                   plugin.reloadItemsConfig();
+                  player.sendMessage(prefix + "성공적으로 저장되었습니다!");
                 }
                 else {
                   player.sendMessage(prefix + "잘못된 등급입니다");

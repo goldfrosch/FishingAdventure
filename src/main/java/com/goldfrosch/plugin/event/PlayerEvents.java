@@ -2,12 +2,14 @@ package com.goldfrosch.plugin.event;
 
 import com.goldfrosch.plugin.MainPlugin;
 import com.goldfrosch.plugin.items.ItemsList;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
+import org.bukkit.event.server.BroadcastMessageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -72,6 +74,24 @@ public class PlayerEvents implements Listener {
         for(int i = 0;i < lore.size();i++){
           lore.set(i,plugin.replaceText(lore.get(i)));
         }
+
+        String broadcastMsg = plugin.getStringItemsList("Items." + currentRank + "." + itemNumber + ".broadcast");
+        if(broadcastMsg != null) {
+          Bukkit.broadcastMessage(plugin.configReturnPlaceholder(plugin.Prefix + broadcastMsg,e.getPlayer()));
+        }
+        else {
+          Bukkit.broadcastMessage(plugin.configReturnPlaceholder(plugin.Prefix + "님이" + item.getRandomItemsName(currentRank,itemNumber) + "을(를) 낚았습니다",e.getPlayer()));
+        }
+
+        String sendMsg = plugin.getStringItemsList("Items." + currentRank + "." + itemNumber + ".message");
+        if(sendMsg != null) {
+          e.getPlayer().sendMessage(plugin.Prefix + sendMsg);
+        }
+        else {
+          e.getPlayer().sendMessage(plugin.Prefix + item.getRandomItemsName(currentRank,itemNumber) + "을(를) 낚았습니다");
+        }
+
+
 
         dropItemMeta.setLore(lore);
 

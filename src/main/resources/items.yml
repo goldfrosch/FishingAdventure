@@ -3,6 +3,8 @@ Items:
     '0':
       material: "stone"
       name: "&aTEST"
+      broadcast: "Test Broadcast"
+      message: "Test Message"
     '1':
       material: "stone"
       name: "&aTESTe1"
@@ -16,6 +18,9 @@ Items:
       material: "ston1"
       name: "&aTESTe3"
       lore:
+        - "hi"
+        - "bye"
+        - "hi"
   'B':
     '0':
       material: "stone"
