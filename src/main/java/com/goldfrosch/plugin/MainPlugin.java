@@ -104,9 +104,9 @@ public class MainPlugin extends JavaPlugin implements Listener {
     return text.replace("&", "§");
   }
 
-  public String configReturnPlaceholder(String msg, Player p) {
-    return msg.contains("%player%") ? msg.replace("%player",p.getName()) : msg;
+  public String configReturnPlaceholder(String msg, Player p, String displayName) {
+    msg = msg.replace("%player",p.getName());
+    msg = msg.replace("%item%",displayName);
+    return msg;
   }
-
-  public String Prefix = getConfig().getString("FishingAdventure.Message.Prefix").replace("&", "§");
 }

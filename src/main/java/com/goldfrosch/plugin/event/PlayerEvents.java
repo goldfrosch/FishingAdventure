@@ -9,7 +9,6 @@ import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
-import org.bukkit.event.server.BroadcastMessageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -48,7 +47,6 @@ public class PlayerEvents implements Listener {
       ItemsList item = new ItemsList(plugin);
       int percent = (int)(Math.random() * 100 + 1);
 
-      String rankPrefix = "FishingAdventure.RankPrefix.";
       String currentRank = "";
       if(percent <= rankPercent.get(0)) {
         currentRank = "C";
@@ -61,13 +59,14 @@ public class PlayerEvents implements Listener {
       }
 
       int itemNumber = item.getRandomItemNumber(currentRank);
+      String itemName = item.getRandomItemsName(currentRank,itemNumber);
 
       try {
         ItemStack dropItem = new ItemStack(Material.valueOf(item.getRandomItemsMaterial(currentRank,itemNumber).toUpperCase()));
         ItemMeta dropItemMeta = dropItem.getItemMeta();
 
         if(item.getRandomItemsName(currentRank,itemNumber) != null) {
-          dropItemMeta.setDisplayName(item.getRandomItemsName(currentRank,itemNumber));
+          dropItemMeta.setDisplayName(itemName);
         }
 
         List<String> lore = plugin.getItemsConfig().getStringList("Items." + currentRank + "." + itemNumber + ".lore");
@@ -77,18 +76,12 @@ public class PlayerEvents implements Listener {
 
         String broadcastMsg = plugin.getStringItemsList("Items." + currentRank + "." + itemNumber + ".broadcast");
         if(broadcastMsg != null) {
-          Bukkit.broadcastMessage(plugin.configReturnPlaceholder(plugin.Prefix + broadcastMsg,e.getPlayer()));
-        }
-        else {
-          Bukkit.broadcastMessage(plugin.configReturnPlaceholder(plugin.Prefix + "님이" + item.getRandomItemsName(currentRank,itemNumber) + "을(를) 낚았습니다",e.getPlayer()));
+          Bukkit.broadcastMessage(plugin.configReturnPlaceholder(plugin.getConfig().getString("FishingAdventure.Message.Prefix").replace("&", "§") + broadcastMsg,e.getPlayer(),itemName));
         }
 
         String sendMsg = plugin.getStringItemsList("Items." + currentRank + "." + itemNumber + ".message");
         if(sendMsg != null) {
-          e.getPlayer().sendMessage(plugin.Prefix + sendMsg);
-        }
-        else {
-          e.getPlayer().sendMessage(plugin.Prefix + item.getRandomItemsName(currentRank,itemNumber) + "을(를) 낚았습니다");
+          e.getPlayer().sendMessage(plugin.configReturnPlaceholder(plugin.getConfig().getString("FishingAdventure.Message.Prefix").replace("&", "§") + sendMsg,e.getPlayer(),itemName));
         }
 
 
