@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
@@ -74,6 +75,15 @@ public class PlayerEvents implements Listener {
           lore.set(i,plugin.replaceText(lore.get(i)));
         }
 
+        int durability = Material.valueOf(item.getRandomItemsMaterial(currentRank,itemNumber).toUpperCase()).getMaxDurability();
+        int damaged = plugin.getItemsConfig().getInt("Items." + currentRank + "." + itemNumber + ".option.durability");
+
+        if(damaged != 0) {
+          Damageable damageable = (Damageable) dropItemMeta;
+          damageable.setDamage(durability - damaged);
+          dropItem.setItemMeta((ItemMeta) damageable);
+        }
+
         String broadcastMsg = plugin.getStringItemsList("Items." + currentRank + "." + itemNumber + ".broadcast");
         if(broadcastMsg != null) {
           Bukkit.broadcastMessage(plugin.configReturnPlaceholder(plugin.getConfig().getString("FishingAdventure.Message.Prefix").replace("&", "§") + broadcastMsg,e.getPlayer(),itemName));
@@ -83,7 +93,6 @@ public class PlayerEvents implements Listener {
         if(sendMsg != null) {
           e.getPlayer().sendMessage(plugin.configReturnPlaceholder(plugin.getConfig().getString("FishingAdventure.Message.Prefix").replace("&", "§") + sendMsg,e.getPlayer(),itemName));
         }
-
 
 
         dropItemMeta.setLore(lore);

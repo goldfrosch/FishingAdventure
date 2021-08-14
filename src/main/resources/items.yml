@@ -3,11 +3,19 @@ Items:
     '0':
       material: "stone"
       name: "&aTEST"
+      lore:
+        - "&6test1"
+        - "&6test2"
       broadcast: "Test Broadcast"
       message: "Test Message"
+      option:
+        durability: 5
     '1':
       material: "stone"
       name: "&aTESTe1"
+      lore:
+        - "&6test1"
+        - "&6test2"
     '2':
       material: "stone"
       name: "&aTESTe2"
@@ -25,11 +33,20 @@ Items:
     '0':
       material: "stone"
       name: "&aTEST"
+      lore:
+        - "&6test1"
+        - "&6test2"
   'A':
     '0':
       material: "stone"
       name: "&aTEST"
+      lore:
+        - "&6test1"
+        - "&6test2"
   'S':
     '0':
       material: "stone"
       name: "&aTEST"
+      lore:
+        - "&6test1"
+        - "&6test2"
